@@ -1,0 +1,61 @@
+{% extends 'users/layout.html' %}
+
+{% block title %}
+<h2>Система рассылок</h2>
+            <p class="lead"></p>
+{% endblock %}
+
+
+{% block body %}
+
+
+
+<div class="row">
+    {% if not request.user.client_set.exists %}
+    <div class="col-4">
+
+        <button type="button" class="btn btn-lg  btn-success mb-5"
+                            onclick="window.location.href='{% url 'clients:create' %}'">Стать клиентом
+                    </button>
+                    <br>
+
+    </div>
+    {% endif %}
+
+    {% if request.user.client_set.exists %}
+    <div class="col-4">
+        <button type="button" class="btn btn-lg  btn-success mb-5"
+                            onclick="window.location.href='{% url 'mailings:mailing_create' %}'">Создать рассылку
+                    </button>
+                    <br>
+
+    </div>
+    {% endif %}
+</div>
+
+
+{% for object in object_list %}
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{ object.owner }}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">{{object.message_title}}</h6>
+        <br>
+        <p class="card-text">{{object.status}}</p>
+
+        {% if object.owner.id == request.user.id or user.is_staff %}
+            {% if object.owner.id == request.user.id %}
+                <a href="{% url 'mailings:mailing_update' pk=object.pk %}" class="card-link">Изменить</a>
+                <a href="{% url 'mailings:logs' pk=object.pk %}" class="card-link">ЛОГИ</a>
+            {% endif %}
+            <br>
+
+            <a href="{% url 'mailings:mailing_delete' pk=object.pk %}" class="card-link">Удалить</a>
+
+        {% endif %}
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

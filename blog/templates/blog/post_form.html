@@ -1,0 +1,32 @@
+{% extends 'users/layout.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class="row-12">
+
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Заполни данные</h4><br>
+
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <button type="submit" class="btn btn-success">
+                                {% if object %}
+                                Сохранить
+                                {% else %}
+                                Создать пост
+                                {% endif %}
+                            </button>
+
+                        </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    {% endblock %}

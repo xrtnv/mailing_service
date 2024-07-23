@@ -1,0 +1,33 @@
+{% extends 'users/layout.html' %}
+
+{% block body %}
+
+<button type="button" class="btn btn-lg  btn-success mb-5"
+                            onclick="window.location.href='{% url 'blog:create' %}'">Добавить пост
+                    </button>
+                    <br>
+
+{% for object in object_list %}
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{ object.title }}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">{{object.date}}</h6>
+        <img src="/media/{{ object.image }}" style="max-width: 100%; height: auto;"/>
+        <br>
+        <p class="card-text">{{object.body | truncatechars:100}}</p>
+
+
+            {% if perms.blog.add_post %}
+                <a href="{% url 'blog:update' pk=object.pk %}" class="card-link">Изменить</a>
+            <br>
+                <a href="{% url 'blog:detail' pk=object.pk %}" class="card-link">Посмотреть</a>
+                <a href="{% url 'blog:delete' pk=object.pk %}" class="card-link">Удалить</a>
+
+            {% endif %}
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

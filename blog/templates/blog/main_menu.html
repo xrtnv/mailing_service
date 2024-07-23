@@ -1,0 +1,72 @@
+{% extends 'users/layout.html' %}
+
+{% block title %}
+<h2>Главная страница</h2>
+<p class="lead"></p>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header">
+                <h4>Информация о сайте:</h4>
+            </div>
+            <div class="card-body">
+                <table class="table">
+
+                    <tbody>
+                    <tr>
+                        <th scope="row">Количество всех рассылок:</th>
+                        <td><h3>{{mailings_count}}</h3></td>
+
+                    </tr>
+                    <tr>
+                        <th scope="row">Количество активных рассылок:</th>
+                        <td><h3>{{mailings_active_count}}</h3></td>
+
+                    </tr>
+                    <tr>
+                        <th scope="row">Уникальных клиентов:</th>
+                        <td><h3>{{clients_count}}</h3></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+        {% for object in posts %}
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Пост: "{{ object.title }}"</h5>
+                <hr>
+                <br>
+                <img src="/media/{{ object.image }}" style="max-width: 100%; height: auto;"/>
+
+                <hr>
+                <br><br><br>
+                <h6 class="card-subtitle mb-2 text-body-secondary">{{object.body | truncatechars:100}}</h6>
+                <br>
+
+
+                <a href="{% url 'blog:detail' pk=object.pk %}" class="card-link">Посмотреть</a>
+
+
+            </div>
+        </div>
+        <br><br><br>
+        {% endfor %}
+    </div>
+
+
+</div>
+
+
+{% endblock %}

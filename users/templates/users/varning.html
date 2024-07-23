@@ -1,0 +1,34 @@
+{% extends 'users/layout.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block body %}
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-6">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="text-center">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">
+
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <H3>Мы отправили вам ссылку на электронную почту.</H3>
+                            <a>Перейдите по ней и подтвердите, что это ваша почта.
+                                После чего вы сможете авторизоваться</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

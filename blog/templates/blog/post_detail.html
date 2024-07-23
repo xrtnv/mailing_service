@@ -1,0 +1,26 @@
+{% extends 'users/layout.html' %}
+
+{% block body %}
+
+
+
+
+    <div class="card-body">
+        <h5 class="card-title">Пост: "{{ object.title }}"</h5>
+        <br>
+        <h6 class="card-subtitle mb-2 text-body-secondary">Дата публикации: {{object.date}}</h6>
+        <img src="/media/{{ object.image }}" style="max-width: 100%; height: auto;"/>
+        <hr>
+        <br><br><br><br><br>
+
+        <p class="card-text">{{object.body}}</p>
+
+
+        <p class="text-muted">Количество просмотров: {{object.views_count}}</p>
+
+    </div>
+
+
+
+
+{% endblock %}
